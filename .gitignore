@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Production build outputs
+dist/
+dist-ssr/
+*.local
+
+# TypeScript incremental cache
+*.tsbuildinfo
+
+# Environment variables
+.env
+.env.*
+
+# Editor & OS files
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+
+# Skill temp artifacts
+.taste-skill/

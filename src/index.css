@@ -1,0 +1,191 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Anton", Impact, sans-serif;
+}
+
+@layer base {
+  html {
+    font-family: "Inter", sans-serif;
+    background-color: #ffffff;
+    color: #111115;
+    scroll-behavior: smooth;
+    overflow-x: clip;
+  }
+
+  body {
+    margin: 0;
+    background-color: #ffffff;
+    color: #111115;
+    overflow-x: clip;
+  }
+
+  section[id],
+  footer[id] {
+    scroll-margin-top: 72px;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--active-text-accent, #b8431b);
+    outline-offset: 2px;
+  }
+}
+
+.font-display {
+  font-family: "Anton", sans-serif;
+}
+
+/* Architectural light-theme surface patterns */
+.bg-pattern-grid {
+  background-image:
+    linear-gradient(to right, rgba(17, 17, 21, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17, 17, 21, 0.045) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.bg-pattern-dots {
+  background-image: radial-gradient(rgba(17, 17, 21, 0.09) 1.15px, transparent 1.15px);
+  background-size: 24px 24px;
+}
+
+.bg-pattern-diagonal {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(17, 17, 21, 0.03),
+    rgba(17, 17, 21, 0.03) 1px,
+    transparent 1px,
+    transparent 14px
+  );
+}
+
+.bg-pattern-rings {
+  background-image:
+    radial-gradient(circle at 50% 58%, rgba(255, 255, 255, 0.28) 0, rgba(255, 255, 255, 0.28) 1px, transparent 1px),
+    radial-gradient(circle at 50% 58%, rgba(255, 255, 255, 0.14) 36%, transparent 36.5%),
+    radial-gradient(circle at 50% 58%, rgba(255, 255, 255, 0.1) 56%, transparent 56.5%);
+}
+
+/* Nav link underline micro-interaction */
+.nav-underline {
+  position: relative;
+}
+
+.nav-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1.5px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.nav-underline:hover::after,
+.nav-underline:focus-visible::after,
+.nav-underline[aria-expanded="true"]::after {
+  transform: scaleX(1);
+}
+
+@keyframes heroEnterUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gentleFloat {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes panelFadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes videoSlideZoom {
+  0% {
+    transform: scale(1.04) translateY(6px);
+    opacity: 0.7;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.hero-enter {
+  animation: heroEnterUp 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-enter-delay {
+  animation: heroEnterUp 520ms cubic-bezier(0.22, 1, 0.36, 1) 100ms both;
+}
+
+.hero-float {
+  animation: gentleFloat 4.2s ease-in-out infinite;
+}
+
+.panel-switch {
+  animation: panelFadeSlide 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.video-chapter-enter {
+  animation: videoSlideZoom 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Scroll reveal transition helpers */
+.reveal-base {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 500ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero-enter,
+  .hero-enter-delay,
+  .hero-float,
+  .panel-switch,
+  .video-chapter-enter {
+    animation: none !important;
+  }
+  .reveal-base {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
